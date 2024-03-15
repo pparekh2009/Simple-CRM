@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<title>All Contacts</title>
+
+	<style>
+		table {
+			border-collapse: collapse;
+			width: 100%;
+			border: 0px solid transparent;
+		}
+
+		th, td {
+			border: none;
+			padding: 8px;
+			text-align: center;
+			cursor: pointer;
+		}
+
+		tr:nth-child(even) {
+			background-color: #f2f2f2;
+		}
+
+		th {
+			background-color: #4CAF50;
+			color: white;
+		}
+
+		.header {
+			padding: 20px;
+			display: flex;
+			flex-direction: row;
+			align-items: center;
+			justify-content: space-between;
+		}
+
+		.btn-add-contact {
+			padding: 10px;
+			border: none;
+			border-radius: 10px;
+			background-color: #abc123;
+			box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
+			font-size: 16px;
+		}
+
+		.contacts-table {
+			border-collapse: collapse;
+			border-radius: 20px;
+			overflow: hidden;
+		}
+	</style>
+
+</head>
+<body>
+
+	<div class="header">
+		<h1>All Contacts</h1>
+
+		<a href="add_contact.html">
+			<button class="btn-add-contact">Add Contact</button>
+		</a>
+	</div>
+
+	<div class="contacts-table">
+		<table>
+			<tr>
+				<th>Name</th>
+				<th>Email</th>
+				<th>Phone</th>
+			</tr>
+			<tr th:each="contact : ${contacts}" th:contactId="${contact.id}" onclick="viewContact(this.getAttribute('contactId'))" >
+				<td th:text="${contact.name}"></td>
+				<td th:text="${contact.email}"></td>
+				<td th:text="${contact.phone}"></td>
+			</tr>
+		</table>
+	</div>
+
+	<script>
+		function viewContact(id) {
+			window.location.href = "http://localhost:8080/contacts/" + id
+		}
+	</script>
+</body>
+</html>
